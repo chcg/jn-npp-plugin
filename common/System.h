@@ -54,7 +54,7 @@ public:
 
 	template<int NUM>
 	static DWORD WINAPI CallBackProc(){
-#ifndef _M_X64
+#ifdef _M_IX86
 		void* v_ebp;	// base pointer, points to actual parameters of called callback function
 
 		__asm {

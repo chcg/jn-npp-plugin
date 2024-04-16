@@ -58,7 +58,7 @@ FARPROC Library::GetProc(BSTR functionName) const {
 }
 
 HRESULT STDMETHODCALLTYPE Library::call(BSTR functionName, BSTR params, int* result){
-#ifndef _M_X64
+#ifdef _M_IX86
 	FARPROC proc = GetProc(functionName);
 
 	if (proc == NULL){
