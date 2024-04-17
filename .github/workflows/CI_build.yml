@@ -27,8 +27,12 @@ jobs:
       id: tagName
 
     - name: zip artifacts for ${{ matrix.build_platform }}
-      if: matrix.build_configuration == 'Release'
+      if: ( matrix.build_platform == 'x64' || matrix.build_platform == 'ARM64' ) && matrix.build_configuration == 'Release'
       run: 7z a jN_${{ steps.tagName.outputs.tag }}_${{ matrix.build_platform }}.zip .\${{ matrix.build_platform }}\${{ matrix.build_configuration }}\jN.dll
+
+    - name: zip artifacts for ${{ matrix.build_platform }}
+      if: matrix.build_platform == 'Win32' && matrix.build_configuration == 'Release'
+      run: 7z a jN_${{ steps.tagName.outputs.tag }}_${{ matrix.build_platform }}.zip .\${{ matrix.build_configuration }}\jN.dll
 
     - name: Archive artifacts for ${{ matrix.build_platform }}
       if: matrix.build_configuration == 'Release'
